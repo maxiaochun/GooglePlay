@@ -33,6 +33,25 @@ public class MainActivity extends BaseActivity {
         mViewPager.setAdapter(mAdapter);
 
         mPagerTab.setViewPager(mViewPager);//将指针和viewpager绑定在一起
+
+        mPagerTab.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+            @Override
+            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+
+            }
+
+            @Override
+            public void onPageSelected(int position) {
+                BaseFragment fragment = FragmentFactory.createFragment(position);
+                //开始加载数据
+                fragment.loadData();
+            }
+
+            @Override
+            public void onPageScrollStateChanged(int state) {
+
+            }
+        });
     }
 
     /**

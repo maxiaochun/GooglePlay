@@ -103,7 +103,7 @@ public abstract class LoadingPage extends FrameLayout {
             new Thread() {
                 @Override
                 public void run() {
-                  final ResultState resultState = initData();
+                  final ResultState resultState = onLoad();
 
                     //运行在主线程
                     UIUtils.runOnUIThread(new Runnable() {
@@ -128,7 +128,7 @@ public abstract class LoadingPage extends FrameLayout {
     public abstract View onCreateSuccessView();
 
     //加载网络数据,返回值表示请求网络结束后的状态
-    public abstract ResultState initData();
+    public abstract ResultState onLoad();
 
     public enum ResultState {
         STATE_SUCCESS(STATE_LOAD_SUCCESS),

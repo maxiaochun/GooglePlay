@@ -13,7 +13,7 @@ import com.xiao.googleplay.utils.UIUtils;
 /**
  * Created by hasee on 2016/6/2.
  */
-public abstract class BaseFragment extends Fragment{
+public abstract class BaseFragment extends Fragment {
 
     private LoadingPage mLoadingPage;
 
@@ -28,8 +28,13 @@ public abstract class BaseFragment extends Fragment{
             @Override
             public View onCreateSuccessView() {
                 //此处必须调用Basefragment的onCreateSuccessView ,否则栈溢出
-               return BaseFragment.this.onCreateSuccessView();
+                return BaseFragment.this.onCreateSuccessView();
 
+            }
+
+            @Override
+            public ResultState onLoad() {
+                return BaseFragment.this.onLoad();
             }
         };
         return mLoadingPage;
@@ -37,4 +42,14 @@ public abstract class BaseFragment extends Fragment{
 
     //加载成功的布局，必须由子类来实现
     public abstract View onCreateSuccessView();
+
+    //加载网络数据，必须由子类实现
+    public abstract LoadingPage.ResultState onLoad();
+
+    //开始加载数据
+    public void loadData() {
+        if (mLoadingPage != null) {
+            mLoadingPage.loadData();
+        }
+    }
 }
